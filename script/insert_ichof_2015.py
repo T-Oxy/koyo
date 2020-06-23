@@ -19,3 +19,5 @@ for month in range(2, 13):
             col.update_one({'_id':post['_id']}, {'$set':{"icho":1}})
         else:
             col.update_one({'_id':post['_id']}, {'$set':{"icho":0}})
+
+    print("2015-"+month+"についてflagを作りました。")
