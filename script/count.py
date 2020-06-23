@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 from s_lib import setup_mongo
 
-result_dir = '/now24/a.saito/tmp/'
+result_dir = '/now24/naruse/tmp/'
 
 def daterange(start, end):
     for n in range((end - start).days):
@@ -91,7 +91,7 @@ def count_sakura(p_name, db, start, end, relation_words_file):
 
 def main():
     pname = 'hk'
-    relation_words_file = '/now24/a.saito/tmp/' + pname + '_soa.txt'
+    relation_words_file = '/now24/naruse/tmp/' + pname + '_soa.txt'
 
     db = setup_mongo('2015_hk_twi_1208')
     start = datetime.strptime('20150217', '%Y%m%d')

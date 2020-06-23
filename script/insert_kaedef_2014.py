@@ -4,10 +4,10 @@
 from pymongo import MongoClient
 from s_lib import setup_mongo, setup_mecab
 
-keywords = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
+keywords = ["かえで", "カエデ", "楓"]
 
 db = setup_mongo('2014_sakura_twi_1208')
-pname_list = ['hk'] # , 'tk', 'is'
+pname_list = ['hk', 'tk', 'is']
 
 for pname in pname_list:
     col = db['season_' + pname]
@@ -15,6 +15,6 @@ for pname in pname_list:
     for post in col.find():
         mors = post['morpho_text'].split(" ")
         if len(set(keywords) & set(mors)) > 0:
-            col.update_one({'_id':post['_id']}, {'$set':{"koyo":1}})
+            col.update_one({'_id':post['_id']}, {'$set':{"kaede":1}})
         else:
-            col.update_one({'_id':post['_id']}, {'$set':{"koyo":0}})
+            col.update_one({'_id':post['_id']}, {'$set':{"kaede":0}})

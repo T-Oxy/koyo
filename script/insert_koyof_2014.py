@@ -4,10 +4,10 @@
 from pymongo import MongoClient
 from s_lib import setup_mongo, setup_mecab
 
-keywords = ["かえで", "カエデ", "楓"]
+keywords = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
 
 db = setup_mongo('2014_sakura_twi_1208')
-pname_list = ['hk'] # , 'tk', 'is'
+pname_list = ['hk', 'tk', 'is']
 
 for pname in pname_list:
     col = db['season_' + pname]
