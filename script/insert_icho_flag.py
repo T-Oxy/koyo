@@ -4,7 +4,7 @@
 from pymongo import MongoClient
 from s_lib import setup_mongo, setup_mecab
 
-keywords = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
+keywords = ["いちょう", "イチョウ", "銀杏"]
 
 db = setup_mongo('2014_sakura_twi_1208')
 pname_list = ['hk'] # , 'tk', 'is'
