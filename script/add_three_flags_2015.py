@@ -38,8 +38,8 @@ def main():
     dbs = [db_tk, db_hk, db_is]
 
     for db in dbs:
-        add_flags(db, pname_list, icho, "icho")
-        add_flags(db, pname_list, kaede, "kaede")
-        add_flags(db, pname_list, koyo, "koyo")
+        add_flags(db, icho, "icho")
+        add_flags(db, kaede, "kaede")
+        add_flags(db, koyo, "koyo")
 
 main()
