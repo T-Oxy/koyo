@@ -24,7 +24,7 @@ def add_flags(db, keywords, f_name):
             else:
                 col.update_one({'_id':post['_id']}, {'$set':{f_name:0}})
 
-        print("###\t" + month + "月への書き込み完了")
+        print("###\t" + month + "月への書き込み完了: " + f_name)
 
 def main():
     icho = ["いちょう", "イチョウ", "銀杏"]

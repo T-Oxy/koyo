@@ -1,5 +1,5 @@
 """
-add_three_flags_2014.pyのテスト版(北海道の1月にのみ)
+add_three_flags_2014.pyのテスト版(北海道の1月にkaedeのみ)
 """
 from pymongo import MongoClient
 from s_lib import setup_mongo, setup_mecab
@@ -8,7 +8,7 @@ def add_flags(db, pname_list, keywords, f_name):
     for pname in pname_list:
         for month in range(1, 2):
             month = str(month).zfill(2)
-            col = db["2014_" + month +"_"+ pname]
+            col = db["2014_" + month + "_" + pname]
 
             for post in col.find():
                 mors = post['morpho_text'].split(" ")
@@ -17,7 +17,7 @@ def add_flags(db, pname_list, keywords, f_name):
                 else:
                     col.update_one({'_id':post['_id']}, {'$set':{f_name:0}})
 
-            print("###\t" + month + "月への書き込み完了")
+            print("###\t" + month + "月への書き込み完了: " + f_name)
 
 def main():
     icho = ["いちょう", "イチョウ", "銀杏"]
@@ -27,8 +27,8 @@ def main():
     db = setup_mongo('2014_twi')
     pname_list = ['hk']
 
-    add_flags(db, pname_list, icho, "icho")
+    # add_flags(db, pname_list, icho, "icho")
     add_flags(db, pname_list, kaede, "kaede")
-    add_flags(db, pname_list, koyo, "koyo")
+    # add_flags(db, pname_list, koyo, "koyo")
 
 main()
