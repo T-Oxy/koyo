@@ -8,7 +8,7 @@ def add_flags(db, pname_list, keywords, f_name):
     for pname in pname_list:
         for month in range(1, 2):
             month = str(month).zfill(2)
-            col = db["2014_" + month + pname]
+            col = db["2014_" + month +"_"+ pname]
 
             for post in col.find():
                 mors = post['morpho_text'].split(" ")
