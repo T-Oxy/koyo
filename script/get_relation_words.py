@@ -1,16 +1,16 @@
 """
 教師データのツイート内に含まれる各単語と
-'紅葉'の関連度を計算する
+"イチョウ"の関連度を計算する
 """
 
 from s_lib import setup_mongo
 import sys, math, collections
 
 icho = ["いちょう", "イチョウ", "銀杏"]
-kaede = ["かえで", "カエデ", "楓"]
-koyo = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
+# kaede = ["かえで", "カエデ", "楓"]
+# koyo = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
 
-keywords = icho + kaede + koyo
+# keywords = icho + kaede + koyo
 
 def calc_pmi(sw, w, s, N):
   pmi = math.log2(((sw + 1) * N) / (w * s))
