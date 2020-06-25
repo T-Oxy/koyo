@@ -27,7 +27,8 @@ def count(db, f_name):
             'created_at_iso': {
                 '$gte': today,
                 '$lt': next_day
-            }
+            },
+            'icho' : 1
         }
 
         month = str(date.month).zfill(2)
@@ -42,7 +43,7 @@ def count(db, f_name):
     return all_day_list
 
 def main():
-    tk_icho_path = result_dir + "daily_count_tk_all.tsv"
+    tk_icho_path = result_dir + "daily_count_tk_icho.tsv"
     db_tk = setup_mongo('2015_tk_twi')
 
     all_day_list = count(db_tk, 'icho')
