@@ -16,7 +16,7 @@ def count(db, f_name):
     #日毎のフラグが1のツイート数が入っているリストを返す。リストの要素は"day'\t'month'\t'count"の文字列
     all_day_list = []
 
-    start = datetime.strptime('2015-02-23', '%Y-%m-%d')
+    start = datetime.strptime('2015-02-18', '%Y-%m-%d')
     end = datetime.strptime('2015-12-31', '%Y-%m-%d')
 
     for date in daterange(start, end):
