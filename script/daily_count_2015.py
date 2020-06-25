@@ -42,7 +42,7 @@ def count(db, f_name):
     return all_day_list
 
 def main():
-    tk_icho_path = result_dir + "daily_count_tk_icho.tsv"
+    tk_icho_path = result_dir + "daily_count_tk_all.tsv"
     db_tk = setup_mongo('2015_tk_twi')
 
     all_day_list = count(db_tk, 'icho')
