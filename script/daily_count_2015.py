@@ -33,7 +33,7 @@ def count(db, f_name):
         month = str(date.month).zfill(2)
         day = str(date.day).zfill(2)
 
-        collection = db['2015-' + m]
+        col = db['2015-' + month]
         one_day_count = col.find(when).count()
 
         one_day = '\t'.join([month, day, str(one_day_count)])
