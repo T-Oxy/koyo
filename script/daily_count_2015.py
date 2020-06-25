@@ -36,7 +36,7 @@ def count(db, f_name):
         collection = db['2015-' + m]
         one_day_count = col.find(when).count()
 
-        one_day = '\t'.join([month, day, str(one_day_count)]
+        one_day = '\t'.join([month, day, str(one_day_count)])
         all_day_list.append(one_day)
 
     return all_day_list
