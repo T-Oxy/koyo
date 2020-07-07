@@ -32,11 +32,18 @@ def count_all(db):
         today = date.isoformat()
         next_day = (date + timedelta(days=1)).isoformat()
 
+        where = {
+            'created_at_iso': {
+                '$gte': today,
+                '$lt': next_day
+            }
+        }
+
         month = str(date.month).zfill(2)
         day = str(date.day).zfill(2)
 
         col = db['2015-' + month]
-        one_day_count = col.find().count()
+        one_day_count = col.find(where).count()
 
         one_day = '\t'.join([month, day, str(one_day_count)])
         all_day_list.append(one_day)
