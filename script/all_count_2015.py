@@ -1,5 +1,5 @@
 """
-2015年のDBから、日毎ににフラグが立っているツイート数をカウントする
+2015年のDBから、日毎のツイート数をカウントする
 """
 from pymongo import MongoClient
 from s_lib import setup_mongo, setup_mecab
@@ -23,7 +23,7 @@ def count(db, f_name):
         today = date.isoformat()
         next_day = (date + timedelta(days=1)).isoformat()
 
-        when = {
+        where = {
             'created_at_iso': {
                 '$gte': today,
                 '$lt': next_day
@@ -34,7 +34,7 @@ def count(db, f_name):
         day = str(date.day).zfill(2)
 
         col = db['2015-' + month]
-        one_day_count = col.find(when).count()
+        one_day_count = col.find(where).count()
 
         one_day = '\t'.join([month, day, str(one_day_count)])
         all_day_list.append(one_day)

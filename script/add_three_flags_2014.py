@@ -1,7 +1,7 @@
 """
 既存のDB:
     2014_twi
-に、イチョウ・カエデ・紅葉キーワードが含まれているか判定するflagとなるフィールドを追加するスクリプト
+のツイートに「いちょう」、「かえで」、「その他」が含まれているか判定するflagのフィールドを追加するスクリプト
 """
 from pymongo import MongoClient
 from s_lib import setup_mongo, setup_mecab
@@ -19,18 +19,19 @@ def add_flags(db, pname_list, keywords, f_name):
                 else:
                     col.update_one({'_id':post['_id']}, {'$set':{f_name:0}})
 
-            print("###\t" + month + "月への書き込み完了: " + f_name)
+            print("###\t" + month + "月完了: " + f_name + ' of ' + pname)
 
 def main():
+    pname_list = ['hk', 'tk', 'is']
+
     icho = ["いちょう", "イチョウ", "銀杏"]
     kaede = ["かえで", "カエデ", "楓"]
-    koyo = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
+    others = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
 
     db = setup_mongo('2014_twi')
-    pname_list = ['hk', 'tk', 'is']
 
     add_flags(db, pname_list, icho, "icho")
     add_flags(db, pname_list, kaede, "kaede")
-    add_flags(db, pname_list, koyo, "koyo")
+    add_flags(db, pname_list, koyo, "others")
 
 main()
