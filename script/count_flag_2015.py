@@ -5,14 +5,20 @@ from datetime import datetime
 from datetime import timedelta
 
 """
-2015年のDBから、日毎のツイート数・関連ツイート数をカウントし、ファイルに出力する。
+2015年のDBから、日毎の関連ツイート数(icho, kaede, others, koyo)をカウントし、ファイルに出力する。
+icho = ["いちょう", "イチョウ", "銀杏"]
+kaede = ["かえで", "カエデ", "楓"]
+others = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
+koyo = icho + kaede + others
+
 出力フォーマット:
     [月 日 その日のツイート数]
+
 出力ファイル名：
 ・daily_count_<県>_icho.tsv"
 ・daily_count_<県>_kaede.tsv"
 ・daily_count_<県>_others.tsv"
-・daily_count_<県>_all.tsv"
+・daily_count_<県>_koyo.tsv"
 """
 
 def daterange(_start, _end):
@@ -50,8 +56,8 @@ def count(db, flag):
 
     return all_day_list
 
-def count_all(db):
-    # 日毎に、icho, kaede, othersのいずれかのフラグが1のdocumentをカウントする。
+def count_koyo(db):
+    # 日毎に、ichoまたはkaedeまたはothersのいずれかのフラグが1のdocumentをカウントする。
     # 返すリストの要素は"day'\t'month'\t'count"の文字列
     all_day_list = []
 
@@ -98,8 +104,8 @@ def main():
             filename = "daily_count_" + pre + "_" + flag + ".tsv"
             with open(result_dir+filename, "w") as f:
                 f.write("\n".join(m_d_count_list))
-        m_d_count_list = count_all(db)
-        filename = "daily_count_" + pre + "_all.tsv"
+        m_d_count_list = count_koyo(db)
+        filename = "daily_count_" + pre + "_koyo.tsv"
         with open(result_dir+filename, "w") as f:
             f.write("\n".join(m_d_count_list))
 
