@@ -10,7 +10,7 @@ def rename(db):
         month = str(month).zfill(2)
         col = db["2015-" + month]
 
-        col.update({}, { "$rename": { "koyo": "others" } }, false, true)
+        col.update({}, { "$rename": { "koyo": "others" } }, False, True)
 
         print("###\t" + month + "月完了")
 
