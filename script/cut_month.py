@@ -12,10 +12,10 @@ def cut_month(fromdb, todb):
 
     for pref in prefs:
         tocol = todb[pref]
-        for mon in tqdm(mons):
+        for mon in mons:
             fromcol = fromdb["2014_" + str(mon) + "_" + pref]
             docs = fromcol.find()
-            for i in docs:
+            for i in tqdm(docs):
                 tocol.insert_one(i)
 
 def main():
