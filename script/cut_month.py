@@ -16,7 +16,7 @@ def cut_month(fromdb, todb):
             fromcol = fromdb["2014_" + str(mon) + "_" + pref]
             docs = fromcol.find()
             for i in docs:
-                tocol.insert_one(docs)
+                tocol.insert_one(i)
 
 def main():
     fromdb = setup_mongo('2014_twi')
