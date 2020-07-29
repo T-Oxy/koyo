@@ -1,13 +1,14 @@
 from pymongo import MongoClient
 from s_lib import setup_mongo, setup_mecab
 
-def rename(db):
-    col = db["result"]
-    col.update_many({}, { "$rename": { "kill_count_2": "kill_count" } })
+def test(db):
+    col = db["season_hk"]
+    find = col.find()
+    for i in find:
+        col.insert(i)
 
 def main():
-    db = setup_mongo('ika-db')
-
-    rename(db)
+    db = setup_mongo('2014_sakura_twi_1208')
+    test(db)
 
 main()

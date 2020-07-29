@@ -7,29 +7,36 @@ from s_lib import setup_mongo
 import sys, math, collections
 
 icho = ["いちょう", "イチョウ", "銀杏"]
-# kaede = ["かえで", "カエデ", "楓"]
-# koyo = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
+kaede = ["かえで", "カエデ", "楓"]
+sonota = ["こうよう", "もみじ", "紅葉", "黄葉", "コウヨウ", "モミジ"]
+koyo = icho + kaede + sonota
 
-# keywords = icho + kaede + koyo
+def daterange(_start, _end):
+    for n in range((_end - _start + timedelta(days=1)).days):
+        yield _start + timedelta(n)
 
 def calc_pmi(sw, w, s, N):
   pmi = math.log2(((sw + 1) * N) / (w * s))
   return(pmi)
-
 
 def calc_soa(sw, ns_w, w, s, ns, N):
     #  soa = math.log2(((sw + 1) * ns)/((ns_w + 1) * s))
     soa = calc_pmi(sw, w, s, N) - calc_pmi(ns_w, w, ns, N)
     return(soa)
 
-
 def main():
     args = sys.argv
 
-    db = setup_mongo('2014_sakura_twi_1208')
-    pname = 'hk'
+    db = setup_mongo('2014_twi')
+    pname = ["hk"] # ["tk", "hk", "is"]
 
-    col = db['season_' + pname]
+    start = datetime.strptime('2014-10-30', '%Y-%m-%d')
+    end = datetime.strptime('2014-11-03', '%Y-%m-%d')
+
+    correct_duration = daterange(start, end)
+
+    col = db["2014" + month + pname]
+
     s_twis = list(col.find({'koyo': 1}))
     ns_twis = list(col.find({'koyo': 0}))
 

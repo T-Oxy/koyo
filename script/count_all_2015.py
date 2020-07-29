@@ -17,7 +17,7 @@ from datetime import timedelta
 """
 
 def daterange(_start, _end):
-    for n in range((_end - _start).days):
+    for n in range((_end - _start + timedelta(days=1)).days):
         yield _start + timedelta(n)
 
 def count_all(db):
