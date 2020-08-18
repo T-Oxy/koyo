@@ -1,25 +1,23 @@
+"""
+2015年のDBから、条件を満たす日毎のツイート数をカウント・ファイルに出力する。
+出力ファイル名： <県>_<flag名>_dailycount.txt"
+出力フォーマット: [ISO日付  ツイート数]
+"""
 # -*- coding: utf-8 -*-
-from pymongo import MongoClient
-from s_lib import setup_mongo, setup_mecab
+import os
 from datetime import datetime
 from datetime import timedelta
 from datetime import timezone
+
 from tqdm import tqdm
+from pymongo import MongoClient
 
-"""
-2015年のDBから、条件を満たす日毎のツイート数をカウントし、ファイルに出力する。
+from s_lib import setup_mongo, setup_mecab
 
-出力フォーマット:
-    [月 日 その日のツイート数]
-    [ISO日付  ツイート]に変えたい
 
-出力ファイル名：
-・<県>_<flag名>_dailycount.tsv"
-"""
-
-def daterange(_start, _end):
-    for n in range((_end - _start + timedelta(days=1)).days):
-        yield _start + timedelta(n)
+def daterange(start, end):
+    for n in range((end - start + timedelta(days=1)).days):
+        yield start + timedelta(n)
 
 def count(db, flag):
     # 日毎に、与えられたflagフィールドが1のdocumentをカウントする。
@@ -34,11 +32,10 @@ def count(db, flag):
         today = date.isoformat()
         next_day = (date + timedelta(days=1)).isoformat()
 
-
         if flag == "total":
             where = {
                 'created_at_iso': {
-                    '$gte': today,
+                    '$gte': today, # ISO形式の文字列と文字列で時間比較してるけどいけてる...？
                     '$lt': next_day
                 }
             }
@@ -63,27 +60,26 @@ def count(db, flag):
         day = str(date.day).zfill(2)
 
         col = db['2015-' + month]
-        one_day_count = col.find(where).count()
+        count = col.find(where).count()
 
-        one_day = '\t'.join([month, day, str(one_day_count)])
+        one_day = date.date().isoformat() + '\t' + str(count)
         all_day_list.append(one_day)
 
     return all_day_list
 
 def main():
-    result_dir = '/now24/naruse/result/'
+    result_dir = '/now24/naruse/result1/'
 
     db_tk = setup_mongo('2015_tk_twi')
     db_hk = setup_mongo('2015_hk_twi_1208')
     db_is = setup_mongo('2015_is_twi')
 
-    flags = ["total"]
-    # flags = ["icho", "kaede", "sonota", "koyo", "total"]
+    flags = ["icho", "kaede", "sonota", "koyo", "total"]
     dbs = [db_tk, db_hk, db_is]
     prefecture_list = ["tk", "hk", "is"]
 
     for pref, db in zip(tqdm(prefecture_list), dbs):
-        for flag in flags:
+        for flag in tqdm(flags):
             m_d_count_list = count(db, flag)
             filename = pref + "_" + flag + "_dailycount.tsv"
             os.makedirs(result_dir, exist_ok=True)
