@@ -71,7 +71,7 @@ def count(db, flag):
     return all_day_list
 
 def main():
-    result_dir = '/now24/naruse/out/'
+    result_dir = '/now24/naruse/result/'
 
     db_tk = setup_mongo('2015_tk_twi')
     db_hk = setup_mongo('2015_hk_twi_1208')
@@ -82,10 +82,11 @@ def main():
     dbs = [db_tk, db_hk, db_is]
     prefecture_list = ["tk", "hk", "is"]
 
-    for pref, db in zip(prefecture_list, dbs):
+    for pref, db in zip(tqdm(prefecture_list), dbs):
         for flag in flags:
             m_d_count_list = count(db, flag)
-            filename = pref + "_" + flag + "dailycount.tsv"
+            filename = pref + "_" + flag + "_dailycount.tsv"
+            os.makedirs(result_dir, exist_ok=True)
             with open(result_dir+filename, "w") as f:
                 f.write("\n".join(m_d_count_list))
 
