@@ -1,2 +1,0 @@
-python3 add_three_flags_2014.py
-python3 add_three_flags_2015.py
