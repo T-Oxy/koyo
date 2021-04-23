@@ -35,7 +35,7 @@ def date_range(start, end):
         yield start + timedelta(n)
 
 def read_relation_words(pref, flag):
-    rwords_dir = "/now24/naruse/koyo/result/01related_words_with_count/"
+    rwords_dir = "/now24/t.oku/koyo/result_01/01related_words_with_count/"
     # fname = f"{flag}_{pref}_{numofclasses}soa.txt"
     fname = f"{flag}_{pref}_{numofclasses}soa.txt"
     # fname = f"icho_tk_uniq.csv"
@@ -112,7 +112,7 @@ def main():
     flags = ["icho", "kaede", "sonota", "koyo"]  # ["icho", "kaede", "sonota", "koyo", "jumoku", "sakura"]
     rates = range(10, 101, 10)
 
-    result_dir = '/now24/naruse/koyo/result/02rtweets_count/'
+    result_dir = '/now24/t.oku/koyo/result_01/02rtweets_count/'
     os.makedirs(result_dir, exist_ok=True)
 
     for pref, db in tqdm(dbs, desc="DB(pref)"):

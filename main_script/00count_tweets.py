@@ -70,7 +70,8 @@ def count(db, flag):
     return all_day_list
 
 def main():
-    result_dir = '/now24/naruse/koyo/result/00total_count/'
+    #    result_dir = '/now24/naruse/koyo/result/00total_count/'
+    result_dir = '/now24/t.oku/koyo/result/00total_count/'
 
     db_tk = setup_mongo('2015_tk_twi')
     db_hk = setup_mongo('2015_hk_twi_1208')

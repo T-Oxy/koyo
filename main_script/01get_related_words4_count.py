@@ -184,7 +184,7 @@ def main():
 
             sorted_soa = sorted(soa_of_word.items(), key=lambda x:x[1][0], reverse=True)
 
-            result_dir = '/now24/naruse/koyo/result/01related_words_with_count/'
+            result_dir = '/now24/t.oku/koyo/result_01/01related_words_with_count/'
             os.makedirs(result_dir, exist_ok=True)
             with open(result_dir + f'{flag}_{pref}_4pmi.txt', 'w') as f:
                 for w, pmi in sorted_pmi:
